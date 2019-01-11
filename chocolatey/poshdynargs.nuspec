@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>poshdynargs</id>
+    <title>posh-dynargs</title>
+    <version>0.1.0.0</version>
+    <authors>Ty Walls, Keith Dahlby, Mark Embling, Jeremy Skinner, Keith Hill</authors>
+    <owners>Ty Walls</owners>
+    <description>### posh-dynargs
+A PowerShell module that enables dynamic CLI argument completion
+
+TODO: Flesh out description
+    </description>
+    <summary>Enables dynamic CLI argument completion in PowerShell.</summary>
+    <tags>poshdynargs posh-dynargs powershell autocomplete tab-completion</tags>
+    <projectUrl>https://github.com/tygerbytes/posh-dynargs</projectUrl>
+    <licenseUrl>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.0/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <dependency id="chocolatey" version="0.9.10" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
+<!-- character encoding: “UTF-8” -->

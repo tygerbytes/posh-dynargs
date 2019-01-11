@@ -1,0 +1,20 @@
+TOPIC
+    posh-dynargs
+
+SHORT DESCRIPTION
+    TODO:
+
+LONG DESCRIPTION
+    TODO:
+
+USAGE
+    TODO:
+
+PERFORMANCE
+    TODO:
+
+BASED ON WORK BY:
+    Ty Walls, https://www.tygertec.com/
+    Keith Dahlby, http://solutionizing.net/
+    Mark Embling, http://www.markembling.info/
+    Jeremy Skinner, http://www.jeremyskinner.co.uk/
