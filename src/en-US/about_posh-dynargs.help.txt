@@ -11,7 +11,16 @@ USAGE
     TODO:
 
 PERFORMANCE
-    TODO:
+    posh-dynargs piggybacks on top of the PowerShell prompt. Every time prompt
+    is invoked, Register-LocalArgumentCompleters is also invoked.
+
+    Register-LocalArgumentCompleters will process .argument-completer-registry
+    if it exists. This involves registering each argument completer and creating
+    a helper function. If you experience a slowdown, it will be here. Once
+    registered, the process will not repeat until the directory changes.
+
+    To enable timing of the Register-LocalArgumentCompleters function, set
+    $PoshDynargsSettings.EnableTiming = $true
 
 BASED ON WORK BY:
     Ty Walls, https://www.tygertec.com/

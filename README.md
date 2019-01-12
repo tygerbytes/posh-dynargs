@@ -9,7 +9,7 @@ posh-dynargs was heavily influenced by [posh-git](TODO: LINK). A special thanks 
 If you don't have Chocolatey, install it from the [Chocolately Install page](https://chocolatey.org/install).
 With Chocolatey installed, execute the following command to install posh-dynargs:
 ```powershell
-choco install posh-dynargs
+choco install poshdynargs
 ```
 
 ## Based on work by
