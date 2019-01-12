@@ -3,7 +3,7 @@ TOPIC
 
 SHORT DESCRIPTION
     posh-dynargs enables tab completion for commands whose arguments change
-    depending on the current directory. It also generates wrapper functions for
+    depending on the current directory. It also generates helper functions for
     those commands, adding capabilities such as logging, timing, and audio
     alerts.
 
@@ -82,7 +82,7 @@ TAB COMPLETION
         "regex": "(--[a-z]+=?)"
     }
 
-    DANGER WILL ROBINSON
+    DANGER, WILL ROBINSON
     Executing the "help command" adds a security risk to posh-dynargs, because
     we leave the relative safety of simply parsing text and begin executing
     code. The following precautions have been taken to help mitigate this risk:
