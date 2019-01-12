@@ -1,0 +1,27 @@
+{
+    "completableCommands": [
+        {
+            "name": "build",
+            "argsPath": "./build/ci.cake",
+            "type": "cake",
+            "funcDefaults": {
+                "logOutput": true,
+                "talk": true,
+                "useTimer": true,
+                "useGlobal": false
+            }
+        },
+        {
+            "name": "scrape",
+            "argsPath": "./tools/scrape.ps1",
+            "type": "custom",
+            "regex": "^Task ([A-Z][^ ]+)"
+        },
+        {
+            "name": "test",
+            "helpCommand": "--help",
+            "type": "custom",
+            "regex": "(--[a-z]+=?)"
+        }
+    ]
+}

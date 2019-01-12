@@ -5,91 +5,6 @@ param(
 
 .SYNOPSIS
 Register tab completion for custom commands that change depending on the current directory.
-Author: Ty Walls (https://twitter.com/tygertec)
-Website: https://www.tygertec.com
-
-.DESCRIPTION
-Many projects have CI/CD commands like build, ci, make, test, etc.
-Each of these commands has their own set of possible arguments, often dozens of them,
-and their usage and interface can vary from between projects and certainly between organizations.
-
-The idea here is to place a JSON file called ".argument-completer-registry.json" at the root
-of each project directory, which is often a Git repo. Here is a sample:
-
-# Sample .argument-completer-registry.json
-{
-    "completableCommands": [
-        {
-            "name": "build",
-            "argsPath": "./build/ci.cake",
-            "type": "cake",
-            "funcDefaults": {
-                "logOutput": true,
-                "talk": true,
-                "useTimer": true,
-                "useGlobal": false,
-            }
-        },
-        {
-            "name": "scrape",
-            "argsPath": "./tools/scrape.ps1",
-            "type": "custom",
-            "regex": "^Task ([A-Z][^ ]+)"
-        },
-        {
-            "name": "test|test.cmd",
-            "helpCommand": "--help",
-            "type": "custom",
-            "regex": "(--[a-z]+=?)"
-         }
-    ]
-}
-
-# Description of object attributes used in the file:
-
-name:         The name of the command to be completed.
-              Use alternation to specify multiple command names,
-              in case they are aliases for the same command. E.g. "build|ci|make".
-
-argsPath:     The path to the script containing the arguments to be parsed.
-
-helpCommand:  For compiled tools. Parse the arguments from the tool's help output.
-              Supply something like "--help" or "-h".
-              Note that the command's output will be cached in $env:TEMP.
-
-type:         The type of script being parsed. See the switch statement below for natively-supported types.
-
-regex:        (For custom types) The regular expression used to extract the task names
-              from "argsPath" or the output of "helpCommand". The first capturing group
-              must contain the task name.
-
-funcDefaults:  Sets defaults for the generated wrapper function.
-
-    logOutput: true or false. If true, log command output to the TEMP directory.
-               Note that you will lose color output.
-
-    talk:     true or false. If true, audibly communicate a failed or successfully
-              command invocation.
-
-    useTimer:  true or false. If true, display elapsed time when command finishes.
-
-    useGlobal: true or false. If true, use the command found in your PATH rather than the local directory.
-
-
-
-In the above file sample we can assume that there is an executable .\build, a .\scrape, and a .\test
-in the same directory alongside .argument-completer-registry.json. This simple "registry" tells
-the argument completer where the actual script is located and how to parse it.
-
-For example, the "build" command above will execute the Cake script located in ./build/ci.cake.
-The "type" is listed as "cake". The argument completer knows how to parse Cake files and
-extract the arguments, which are then used for tab completion.
-
-When you are in this directory and you type build, PowerShell will find the registered argument completer
-and invoke the associated script block. The script block will load ./.argument-completer-registry.json
-and find the "build" command. Then it parses the Cake script using the path provided in the .json file,
-and uses that to provide tab completion. This happens every time you run the build command, but it happens
-extremely fast. There is typically no lag.
 
 .PARAMETER commandsToComplete
 An array of strings representing the commands to register for tab completion.
@@ -99,7 +14,7 @@ Register-DynamicArgumentCompleters -commandsToComplete @("build", "ci", "test")
 
 .NOTES
 Just to reiterate, there will be no tab completion without a .argument-completer-registry.json
-file in the directory containing the commands. See DESCRIPTION for more details.
+file in the directory containing the commands.
 
 #>
 
