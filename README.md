@@ -1,6 +1,6 @@
-# posh-dynargs (dynamic CLI tab completion for PowerShell)
+# posh-dynargs (dynamic tab completion for project-specific commands)
 
-`posh-dynargs` enables tab completion for commands whose arguments change depending on the current directory. It also generates helper functions for those commands, adding capabilities such as logging, timing, and audio alerts.
+`posh-dynargs` is a PowerShell module that enables tab completion for commands whose arguments change depending on the current directory. It also generates helper functions for those commands, adding capabilities such as logging, timing, and audio alerts.
 
 ## Background and Overview
 
