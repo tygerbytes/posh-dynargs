@@ -6,11 +6,11 @@
 
 Many projects rely on commands like `build`, `ci`, `make`, `test`, etc. Each of these commands has its own set of possible arguments, often dozens of them, and their usage and interface can vary between projects and certainly between organizations.
 
-`posh-dynargs` makes **tab completion** possible for these disparate commands. Possible arguments are determined on the fly, so even when arguments change or new ones are added, they are instantly tab completable. See [TAB COMPLETION]().
+`posh-dynargs` makes **tab completion** possible for these disparate commands. Possible arguments are determined on the fly, so even when arguments change or new ones are added, they are instantly tab completable. See [TAB COMPLETION](#tab-completion).
 
-Additionally, a **helper function** of the same name is generated for each command. Apart from making it possible to invoke the command without the leading `.\` or `./`, it enables additional features such as logging the output. See [HELPER FUNCTIONS]().
+Additionally, a **helper function** of the same name is generated for each command. Apart from making it possible to invoke the command without the leading `.\` or `./`, it enables additional features such as logging the output. See [HELPER FUNCTIONS](#helper-functions).
 
-A project that wants to use `posh-dynargs` only has to include a file called `.argument-completer-registry.json` at the root of the project. This file is a registry that describes the completable commands, how to find their arguments, and how to customize the helper functions. See [ARGUMENT COMPLETER REGISTRY]().
+A project that wants to use `posh-dynargs` only has to include a file called `.argument-completer-registry.json` at the root of the project. This file is a registry that describes the completable commands, how to find their arguments, and how to customize the helper functions. See [ARGUMENT COMPLETER REGISTRY](#argument-completer-registry).
 
 `posh-dynargs` was heavily influenced by [posh-git](https://github.com/dahlbyk/posh-git). A special thanks to [Keith Dahlby](https://github.com/dahlbyk) and friends.
 
@@ -97,7 +97,7 @@ Executing the "help command" adds a security risk to posh-dynargs, because we le
     >>> DANGER! OK to run `./test --help`? (yes/no) :
 ```
 
-So where do we add these argument completer registry entries? You will create a file at the root of your project called `.argument-completer-registry.json`. See [ARGUMENT COMPLETER REGISTRY]().
+So where do we add these argument completer registry entries? You will create a file at the root of your project called `.argument-completer-registry.json`. See [ARGUMENT COMPLETER REGISTRY](#argument-completer-registry).
 
 ### LEADING DASH POWERSHELL BUG
 
@@ -113,7 +113,7 @@ A helper function of the same name is generated for for each command. Apart from
 * An audible prompt when the command finishes, which is great for long-running commands.
 * Timing the command.
 
-Each of these features is optional and configurable in the argument completer registry, using options supplied to funcDefaults. See [ARGUMENT COMPLETER REGISTRY]() for the full syntax.
+Each of these features is optional and configurable in the argument completer registry, using options supplied to funcDefaults. See [ARGUMENT COMPLETER REGISTRY](#argument-completer-registry) for the full syntax.
 
 ## ARGUMENT COMPLETER REGISTRY
 
@@ -195,7 +195,7 @@ To enable timing of the `Register-LocalArgumentCompleters` function, set `$PoshD
 
 ## UNDER THE HOOD
 
-As noted in [PERFORMANCE](), posh-dynargs works by attaching itself to PowerShell's prompt function. Every time the prompt function is invoked, a so is the main posh-dynargs function.
+As noted in [PERFORMANCE](#performance), posh-dynargs works by attaching itself to PowerShell's prompt function. Every time the prompt function is invoked, a so is the main posh-dynargs function.
 
 How does this work? (I'm not happy with the current implementation, and it's likely to change.) If you're using posh-git, the function is attached to and executed with `$GitPromptSettings.DefaultPromptPrefix`. If you aren't using posh-git, the prompt is replaced with a custom one which just so happens to run `Register-LocalArgumentCompleters`.
 
