@@ -3,7 +3,7 @@
   <metadata>
     <id>poshdynargs</id>
     <title>posh-dynargs</title>
-    <version>0.1.0.2</version>
+    <version>0.1.0.3</version>
     <authors>Ty Walls, Keith Dahlby, Mark Embling, Jeremy Skinner, Keith Hill</authors>
     <owners>Ty Walls</owners>
     <description>### posh-dynargs
@@ -14,7 +14,7 @@ posh-dynargs enables tab completion for commands whose arguments change dependin
     <summary>PowerShell module that enables dynamic tab completion for project-specific commands.</summary>
     <tags>poshdynargs posh-dynargs powershell autocomplete tab-completion</tags>
     <projectUrl>https://github.com/tygerbytes/posh-dynargs</projectUrl>
-    <licenseUrl>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.2/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.3/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="chocolatey" version="0.9.10" />

@@ -116,18 +116,19 @@ Register-ArgumentCompleter -Native -CommandName $commandsToComplete -ScriptBlock
 }
 
 # Create helper functions for each command so that you don't have to use the leading ./ or .\
-$script:helperFunctionTemplate = @'
-function global:__NAME__ {
+$script:helperFunctionTemplateBlock = {
     Param(
     [switch]$Talk, [switch]$NoTalk,
     [switch]$Log,  [switch]$NoLog,
     [switch]$Timer,[switch]$NoTimer)
 
+    $commandName = $MyInvocation.MyCommand;
+
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $args = $args -replace ":-", "-"  # <--Lousy "workaround" for args starting with a hyphen
-    $outputPath = "$($env:TEMP)\__NAME__-$($(Get-Location) -replace "[:\\/]", """).txt"
+    $outputPath = "$($env:TEMP)\$commandName-$($(Get-Location) -replace "[:\\/]", """).txt"
 
-    $defaultOptions = ((Get-Content -ErrorAction Ignore ".\.argument-completer-registry.json" | ConvertFrom-Json).completableCommands | Where-Object name -match __NAME__).funcDefaults;
+    $defaultOptions = ((Get-Content -ErrorAction Ignore ".\.argument-completer-registry.json" | ConvertFrom-Json).completableCommands | Where-Object name -match $commandName).funcDefaults;
     $options = @{
         log = $(!($NoLog.IsPresent) -and ($defaultOptions.logOutput -or $Log.IsPresent));
         talk = $(!($NoTalk.IsPresent) -and ($defaultOptions.talk -or $Talk.IsPresent));
@@ -135,9 +136,9 @@ function global:__NAME__ {
         useGlobal = $(!($defaultOptions) -or $defaultOptions.useGlobal);
     }
 
-    $cmdToInvoke = "./__NAME__ $args"
+    $cmdToInvoke = "./$commandName $args"
     if ($options.useGlobal) {
-        $cmdToInvoke = "$(Get-Command __NAME__ -All | Where-Object CommandType -eq Application | Select-Object -First 1) $args"
+        $cmdToInvoke = "$(Get-Command $commandName -All | Where-Object CommandType -eq Application | Select-Object -First 1) $args"
     }
 
     if ($options.log) {
@@ -147,7 +148,7 @@ function global:__NAME__ {
         Invoke-Expression $($cmdToInvoke)
     }
     $result = $LASTEXITCODE -eq 0
-    $message = "`"__NAME__ $args`" finished {0}" -f $(if($result){"successfully"}else{"with errors"})
+    $message = "`"$commandName $args`" finished {0}" -f $(if($result){"successfully"}else{"with errors"})
     Write-Host "`n$message" -ForegroundColor Cyan
     $sw.Stop()
     if ($options.timer) {
@@ -171,7 +172,6 @@ function global:__NAME__ {
     Write-Host "`nReturning: " -NoNewline
     $result
 }
-'@
 
 Write-Host "`nEnabled " -NoNewLine
 Write-Host "tab completion" -ForegroundColor Green -NoNewLine
@@ -180,6 +180,6 @@ Write-Host "helper functions" -ForegroundColor Green -NoNewLine
 Write-Host " for (" -NoNewLine
 foreach($script:command in $commandsToComplete) {
     Write-Host " $script:command" -ForegroundColor Magenta -NoNewLine
-    Invoke-Expression $($script:helperFunctionTemplate -replace "__NAME__", $script:command)
+    Set-Item -Path Function:$script:command -Value $script:helperFunctionTemplateBlock
 }
 Write-Host " )"
