@@ -18,6 +18,7 @@ posh-dynargs enables tab completion for commands whose arguments change dependin
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="chocolatey" version="0.9.10" />
+      <dependency id="powershell" version="5.1.14409"/>
     </dependencies>
   </metadata>
   <files>

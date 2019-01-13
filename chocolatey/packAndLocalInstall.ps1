@@ -15,6 +15,6 @@ elseif (!$(git ls-remote $Remote $tag)) {
 }
 
 choco pack poshdynargs.nuspec
-choco install -f -y poshdynargs -pre --version=$version -s .
+choco install -f -y poshdynargs -pre --version=$version -s "'.;chocolatey'"
 
 Pop-Location
