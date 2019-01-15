@@ -2,6 +2,8 @@
 
 ## 0.1.0.3 - January 12, 2019
 
+* Embed zipball in nupkg instead of downloading from GitHub on install
+* Add chocolatey dependency on powershell, to ensure user has PowerShell 5+
 * Replace helper method template string with a code block. Not a functional change; just cleaner and easier to work with.
 
 ## 0.1.0.2 - January 12, 2019
