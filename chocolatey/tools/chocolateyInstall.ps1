@@ -1,19 +1,18 @@
 ﻿try {
-    $poshdynargsPath = join-path (Get-ToolsLocation) 'poshdynargs'
+    $poshdynargsPath = Join-Path (Get-ToolsLocation) 'poshdynargs'
 
     try {
-      if (test-path($poshdynargsPath)) {
+      if (Test-Path($poshdynargsPath)) {
         Write-Host "Attempting to remove existing `'$poshdynargsPath`'."
-        remove-item $poshdynargsPath -recurse -force
+        Remove-Item $poshdynargsPath -Recurse -Force
       }
     } catch {
       Write-Host "Could not remove `'$poshdynargsPath`'"
     }
 
     $version = "v$Env:chocolateyPackageVersion"
-    if ($version -eq 'v') { $version = 'master' }
-    $poshDynargsInstall = if ($env:poshDynargs ) { $env:poshDynargs } else { "https://github.com/tygerbytes/posh-dynargs/zipball/$version" }
-    $zip = Install-ChocolateyZipPackage 'poshdynargs' $poshDynargsInstall $poshdynargsPath
+    $zipPath = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)\\posh-dynargs-$version.zip"
+    Get-ChocolateyUnzip -FileFullPath $zipPath -PackageName 'poshdynargs' -Destination $poshdynargsPath
     $currentVersionPath = Get-ChildItem "$poshdynargsPath\*posh-dynargs*\" | Sort-Object -Property LastWriteTime | Select-Object -Last 1
 
     if ($PROFILE -and (Test-Path $PROFILE)) {

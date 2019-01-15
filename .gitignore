@@ -1,3 +1,4 @@
 VERSION
 *.nupkg
 obj
+posh-dynargs-v*.zip

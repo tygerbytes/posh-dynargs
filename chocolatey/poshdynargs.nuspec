@@ -28,6 +28,7 @@ posh-dynargs enables tab completion for commands whose arguments change dependin
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
+    <file src="posh-dynargs-v0.1.0.3.zip" target="tools"/>
   </files>
 </package>
 <!-- character encoding: “UTF-8” -->
