@@ -37,12 +37,9 @@
     & $installer
 } catch {
     Write-Verbose "posh-dynargs install error details: $($_ | Format-List * -Force | Out-String)"
-    try {
-        if ($oldProfile) {
-            Write-Warning "Something went wrong! Resetting contents of `'$PROFILE`'."
-            Set-Content -path $PROFILE -value $oldProfile -Force -Encoding $oldProfileEncoding
-        }
+    if ($oldProfile) {
+        Write-Warning "Something went wrong! Resetting contents of `'$PROFILE`'."
+        Set-Content -Path $PROFILE -value $oldProfile -Force -Encoding $oldProfileEncoding
     }
-    catch {}
     throw
 }
