@@ -1,6 +1,6 @@
 # posh-dynargs
 
-`posh-dynargs` is a PowerShell module that enables tab completion for commands whose arguments change depending on the current directory, e.g. a project-specific `build` command. It also generates helper functions for those commands, adding capabilities such as logging, timing, and audio alerts.
+`posh-dynargs` is a PowerShell module that enables tab completion for commands whose arguments change depending on the current directory, e.g. a project-specific `build` command. It also generates helper functions for those commands, adding capabilities such as logging, timing, and audible alerts.
 
 ## Background and Overview
 
@@ -12,7 +12,7 @@ Additionally, a **helper function** of the same name is generated for each comma
 
 A project that wants to use `posh-dynargs` only has to include a file called `.argument-completer-registry.json` at the root of the project. This file is a registry that describes the completable commands, how to find their arguments, and how to customize the helper functions. See [ARGUMENT COMPLETER REGISTRY](#argument-completer-registry).
 
-`posh-dynargs` was heavily influenced by [posh-git](https://github.com/dahlbyk/posh-git). A special thanks to [Keith Dahlby](https://github.com/dahlbyk) and friends.
+`posh-dynargs` was inspired by [posh-git](https://github.com/dahlbyk/posh-git). A special thanks to [Keith Dahlby](https://github.com/dahlbyk) and friends.
 
 ## Installing posh-dynargs
 

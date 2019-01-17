@@ -1,45 +1,31 @@
-﻿try {
-    $poshdynargsPath = Join-Path (Get-ToolsLocation) 'poshdynargs'
+﻿$ErrorActionPreference = 'Stop'
 
-    try {
-      if (Test-Path($poshdynargsPath)) {
-        Write-Host "Attempting to remove existing `'$poshdynargsPath`'."
-        Remove-Item $poshdynargsPath -Recurse -Force
-      }
-    } catch {
-      Write-Host "Could not remove `'$poshdynargsPath`'"
-    }
+$moduleName = 'posh-dynargs'
 
-    $version = "v$Env:chocolateyPackageVersion"
-    $zipPath = "$(Split-Path -Parent $MyInvocation.MyCommand.Definition)\\posh-dynargs-$version.zip"
-    Get-ChocolateyUnzip -FileFullPath $zipPath -PackageName 'poshdynargs' -Destination $poshdynargsPath
-    $currentVersionPath = Get-ChildItem "$poshdynargsPath\*posh-dynargs*\" | Sort-Object -Property LastWriteTime | Select-Object -Last 1
-
-    if ($PROFILE -and (Test-Path $PROFILE)) {
-        Write-Verbose "Updating posh-dynargs location in `'$PROFILE`'."
-        $oldProfile = @(Get-Content $PROFILE)
-
-        . $currentVersionPath\src\Utils.ps1
-        $oldProfileEncoding = Get-FileEncoding $PROFILE
-
-        $newProfile = @()
-        foreach($line in $oldProfile) {
-            if($line -like 'Import-Module *\src\posh-dynargs.psd1*') {
-                $line = "Import-Module '$currentVersionPath\src\posh-dynargs.psd1'"
-            }
-            $newProfile += $line
-        }
-        Set-Content -path $profile -value $newProfile -Force -Encoding $oldProfileEncoding
-    }
-
-    $installer = Join-Path $currentVersionPath 'install.ps1'
-    Write-Verbose "Executing `'$installer`'."
-    & $installer
-} catch {
-    Write-Verbose "posh-dynargs install error details: $($_ | Format-List * -Force | Out-String)"
-    if ($oldProfile) {
-        Write-Warning "Something went wrong! Resetting contents of `'$PROFILE`'."
-        Set-Content -Path $PROFILE -value $oldProfile -Force -Encoding $oldProfileEncoding
-    }
-    throw
+if ($PSVersionTable.PSVersion.Major -le 4) {
+    $PowerShellUpgradeUrl = 'https://docs.microsoft.com/en-us/powershell/scripting/install/installing-windows-powershell'
+    Write-Warning "$moduleName requires PowerShell 5 or later. See '$PowerShellUpgradeUrl' to upgrade."
 }
+
+$libDir = "$($MyInvocation.MyCommand.Definition | Split-Path -Parent | Split-Path -Parent )"
+$sourcePath = Join-Path -Path $libDir -ChildPath "src\*"
+$destinationPath = Join-Path -Path $env:ProgramFiles -ChildPath "WindowsPowerShell\Modules\$moduleName"
+
+if ($PSVersionTable.PSVersion.Major -ge 5) {
+    $manifestFile = Join-Path -Path $libDir -ChildPath "src\$moduleName.psd1"
+    $manifest = Test-ModuleManifest -Path $manifestFile -WarningAction Ignore -ErrorAction Stop
+    $destinationPath = Join-Path -Path $destinationPath -ChildPath $manifest.Version.ToString()
+}
+
+if (Test-Path $destinationPath) {
+    Write-Verbose "Destination exists. Deleting '$destinationPath'."
+    Remove-Item -Recurse $destinationPath -Force
+}
+
+Write-Verbose "Creating destination directory '$destinationPath' for module."
+New-Item -Path $destinationPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+
+Write-Verbose "Moving '$moduleName' files from '$sourcePath' to '$destinationPath'."
+Move-Item -Path $sourcePath -Destination $destinationPath -Force
+
+Write-Host "`nTo add posh-dynargs to your profile use 'Import-Module posh-dynargs; Add-PoshDynargsToProfile'.`n"

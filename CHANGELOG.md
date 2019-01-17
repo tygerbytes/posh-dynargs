@@ -1,10 +1,12 @@
 # posh-dynargs Release History
 
-## 0.1.0.3 - January 12, 2019
+## 0.1.0.3 - January 17, 2019
 
-* Embed zipball in nupkg instead of downloading from GitHub on install
-* Add chocolatey dependency on powershell, to ensure user has PowerShell 5+
-* Replace helper method template string with a code block. Not a functional change; just cleaner and easier to work with.
+* Install module to `$Env:ProgramFiles\WindowsPowerShell\Modules`
+* Don't automatically modify the user profile on choco install
+* Warn user about PowerShell 5+ requirement during choco install
+* Ship source code zipball with nupkg
+* Replace helper method template string with a cleaner code block.
 
 ## 0.1.0.2 - January 12, 2019
 

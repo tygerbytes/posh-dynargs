@@ -180,6 +180,6 @@ Write-Host "helper functions" -ForegroundColor Green -NoNewLine
 Write-Host " for (" -NoNewLine
 foreach($script:command in $commandsToComplete) {
     Write-Host " $script:command" -ForegroundColor Magenta -NoNewLine
-    Set-Item -Path Function:$script:command -Value $script:helperFunctionTemplateBlock
+    Set-Item -Path Function:global:$script:command -Value $script:helperFunctionTemplateBlock
 }
 Write-Host " )"

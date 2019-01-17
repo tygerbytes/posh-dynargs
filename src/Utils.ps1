@@ -106,7 +106,7 @@ function Add-PoshDynargsToProfile {
         }
     }
 
-    $profileContent = "`nImport-Module '$ModuleBasePath\posh-dynargs.psd1'"
+    $profileContent = "`nImport-Module posh-dynargs.psd1"
 
     # Make sure the PowerShell profile directory exists
     $profileDir = Split-Path $profilePath -Parent
@@ -122,38 +122,6 @@ function Add-PoshDynargsToProfile {
 
     if ($PSCmdlet.ShouldProcess($profilePath, "Add 'Import-Module posh-dynargs' to profile")) {
         Add-Content -LiteralPath $profilePath -Value $profileContent -Encoding UTF8
-    }
-}
-
-<#
-.SYNOPSIS
-    Gets the file encoding of the specified file.
-.DESCRIPTION
-    Gets the file encoding of the specified file.
-.PARAMETER Path
-    Path to the file to check.  The file must exist.
-.EXAMPLE
-    PS C:\> Get-FileEncoding $profile
-    Get's the file encoding of the profile file.
-.INPUTS
-    None.
-.OUTPUTS
-    [System.String]
-.NOTES
-    Adapted from http://www.west-wind.com/Weblog/posts/197245.aspx
-#>
-function Get-FileEncoding($Path) {
-    $bytes = [byte[]](Get-Content $Path -Encoding byte -ReadCount 4 -TotalCount 4)
-
-    if (!$bytes) { return 'utf8' }
-
-    switch -regex ('{0:x2}{1:x2}{2:x2}{3:x2}' -f $bytes[0],$bytes[1],$bytes[2],$bytes[3]) {
-        '^efbbbf'   { return 'utf8' }
-        '^2b2f76'   { return 'utf7' }
-        '^fffe'     { return 'unicode' }
-        '^feff'     { return 'bigendianunicode' }
-        '^0000feff' { return 'utf32' }
-        default     { return 'ascii' }
     }
 }
 

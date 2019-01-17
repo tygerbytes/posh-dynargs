@@ -16,7 +16,7 @@ Author = 'Ty Walls and contributors'
 Copyright = '(c) 2019 Ty Walls and contributors'
 
 # Description of the functionality provided by this module
-Description = 'COMING...'
+Description = 'posh-dynargs enables tab completion for commands whose arguments change depending on the current directory, e.g. a project-specific `build` command. It also generates helper functions for those commands, adding capabilities such as logging, timing, and audible alerts.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.0'
