@@ -22,11 +22,6 @@ else {
     Write-Step "Tag exists on remote: origin/$tag"
 }
 
-Write-Banner "Downloading source zipball"
-$zipBallFileName = "posh-dynargs-src-v$version.zip"
-Invoke-WebRequest -Uri "https://github.com/tygerbytes/posh-dynargs/zipball/v$version" -UseBasicParsing -OutFile $zipBallFileName
-Write-Step "$zipBallFileName"
-
 Write-Banner 'Creating chocolatey package'
 choco pack poshdynargs.nuspec
 

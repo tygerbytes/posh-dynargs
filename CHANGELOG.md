@@ -5,7 +5,6 @@
 * Install module to `$Env:ProgramFiles\WindowsPowerShell\Modules`
 * Don't automatically modify the user profile on choco install
 * Warn user about PowerShell 5+ requirement during choco install
-* Ship source code zipball with nupkg
 * Replace helper method template string with a cleaner code block.
 
 ## 0.1.0.2 - January 12, 2019
