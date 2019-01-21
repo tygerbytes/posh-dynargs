@@ -1,3 +1,5 @@
+﻿From: https://github.com/tygerbytes/posh-dynargs/blob/master/LICENSE.txt
+
 MIT License
 
 Copyright (c) 2019 Ty Walls and contributors
