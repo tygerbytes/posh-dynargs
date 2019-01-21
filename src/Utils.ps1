@@ -1,6 +1,3 @@
-# Need this variable as long as we support PS v2
-$ModuleBasePath = Split-Path $MyInvocation.MyCommand.Path -Parent
-
 function Test-Administrator {
     # PowerShell 5.x only runs on Windows so use .NET types to determine isAdminProcess
     # Or if we are on v6 or higher, check the $IsWindows pre-defined variable.
@@ -76,7 +73,7 @@ function Add-PoshDynargsToProfile {
     if (!$profilePath) { $profilePath = $PROFILE }
 
     if (!$Force) {
-        $importedInProfile = Test-ProfileContains 'posh-dynargs'
+        $importedInProfile = Test-ProfileContainsText 'posh-dynargs'
 
         if ($importedInProfile) {
             Write-Warning "Skipping add of posh-dynargs import to file '$profilePath'."
@@ -116,7 +113,7 @@ function Add-PoshDynargsToProfile {
         }
     }
 
-    if (!(Test-ProfileContains 'posh-git')) {
+    if (!(Test-ProfileContainsText 'posh-git')) {
         Write-Warning "If you plan on integrating posh-dynargs with posh-git, make sure it is imported first."
     }
 
@@ -125,48 +122,48 @@ function Add-PoshDynargsToProfile {
     }
 }
 
-function Test-ProfileContains {
+function Test-ProfileContainsText {
     param (
         [Parameter(Position=0)]
         [string]
-        $string
+        $Text
     )
 
     # Search the user's profiles to see if any are using posh-dynargs already.
     $importedInProfile = $false
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContains -Path $PROFILE -String $string
+        $importedInProfile = Test-ScriptContainsText -Path $PROFILE -String $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContains -Path $PROFILE.CurrentUserCurrentHost -String $string
+        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.CurrentUserCurrentHost -String $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContains -Path $PROFILE.CurrentUserAllHosts -String $string
+        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.CurrentUserAllHosts -String $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContains -Path $PROFILE.AllUsersCurrentHost -String $string
+        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.AllUsersCurrentHost -String $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContains -Path $PROFILE.AllUsersAllHosts -String $string
+        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.AllUsersAllHosts -String $Text
     }
     $importedInProfile
 }
 
-function Test-ScriptContains {
+function Test-ScriptContainsText {
     param (
         [Parameter(Position=0)]
         [string]
-        $Path,
+        $ScriptPath,
         [Parameter(Position=1)]
         [string]
-        $String
+        $Text
     )
 
-    if (!$Path -or !(Test-Path -LiteralPath $Path)) {
+    if (!$ScriptPath -or !(Test-Path -LiteralPath $ScriptPath)) {
         return $false
     }
 
-    $match = (@(Get-Content $Path -ErrorAction SilentlyContinue) -match $String).Count -gt 0
-    if ($match) { Write-Verbose "$String found in '$Path'" }
+    $match = (@(Get-Content $ScriptPath -ErrorAction SilentlyContinue) -match $Text).Count -gt 0
+    if ($match) { Write-Verbose "$Text found in '$ScriptPath'" }
     $match
 }
