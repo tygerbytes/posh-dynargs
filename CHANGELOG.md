@@ -1,5 +1,10 @@
 # posh-dynargs Release History
 
+## 0.1.0.4 - January 29, 2019
+
+* Fix broken Add-PoshDynargsToProfile
+* Correct Chocolatey verification instructions
+
 ## 0.1.0.3 - January 17, 2019
 
 * Install module to `$Env:ProgramFiles\WindowsPowerShell\Modules`

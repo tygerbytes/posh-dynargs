@@ -132,19 +132,19 @@ function Test-ProfileContainsText {
     # Search the user's profiles to see if any are using posh-dynargs already.
     $importedInProfile = $false
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContainsText -Path $PROFILE -String $Text
+        $importedInProfile = Test-ScriptContainsText -ScriptPath $PROFILE -Text $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.CurrentUserCurrentHost -String $Text
+        $importedInProfile = Test-ScriptContainsText -ScriptPath $PROFILE.CurrentUserCurrentHost -Text $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.CurrentUserAllHosts -String $Text
+        $importedInProfile = Test-ScriptContainsText -ScriptPath $PROFILE.CurrentUserAllHosts -Text $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.AllUsersCurrentHost -String $Text
+        $importedInProfile = Test-ScriptContainsText -ScriptPath $PROFILE.AllUsersCurrentHost -Text $Text
     }
     if (!$importedInProfile) {
-        $importedInProfile = Test-ScriptContainsText -Path $PROFILE.AllUsersAllHosts -String $Text
+        $importedInProfile = Test-ScriptContainsText -ScriptPath $PROFILE.AllUsersAllHosts -Text $Text
     }
     $importedInProfile
 }

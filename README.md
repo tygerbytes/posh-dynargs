@@ -22,6 +22,8 @@ With Chocolatey installed, execute the following command to install posh-dynargs
 
 ```powershell
 choco install poshdynargs
+Import-Module posh-dynargs
+Add-PoshDynargsToProfile
 ```
 
 ## TAB COMPLETION

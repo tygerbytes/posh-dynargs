@@ -3,7 +3,7 @@
   <metadata>
     <id>poshdynargs</id>
     <title>posh-dynargs</title>
-    <version>0.1.0.3</version>
+    <version>0.1.0.4</version>
     <authors>Ty Walls</authors>
     <owners>Ty Walls</owners>
     <description>### posh-dynargs
@@ -16,10 +16,10 @@ posh-dynargs enables tab completion for commands whose arguments change dependin
     <projectUrl>https://github.com/tygerbytes/posh-dynargs</projectUrl>
     <projectSourceUrl >https://github.com/tygerbytes/posh-dynargs</projectSourceUrl>
     <packageSourceUrl>https://github.com/tygerbytes/posh-dynargs/tree/master/chocolatey</packageSourceUrl>
-    <licenseUrl>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.3/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.4/LICENSE.txt</licenseUrl>
     <docsUrl>https://github.com/tygerbytes/posh-dynargs/blob/master/README.md</docsUrl>
     <bugTrackerUrl>https://github.com/tygerbytes/posh-dynargs/issues</bugTrackerUrl>
-    <releaseNotes>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.3/CHANGELOG.md</releaseNotes>
+    <releaseNotes>https://github.com/tygerbytes/posh-dynargs/blob/v0.1.0.4/CHANGELOG.md</releaseNotes>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="chocolatey" version="0.9.10" />
