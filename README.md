@@ -185,7 +185,7 @@ When you are in this directory and you type build, PowerShell will find the regi
 
 ## USAGE
 
-You need to import the posh-dynargs module into your PowerShell session to use it. This is done with the command `Import-Module posh-dynargs`. Once imported, run `Add-PoshDynargsToProfile` so that posh-dynargs is imported every time PowerShell starts. If you install posh-dynargs with Chocolately, this should already be done for you.
+You need to import the posh-dynargs module into your PowerShell session to use it. This is done with the command `Import-Module posh-dynargs`. Once imported, run `Add-PoshDynargsToProfile` so that posh-dynargs is imported every time PowerShell starts.
 
 ## PERFORMANCE
 

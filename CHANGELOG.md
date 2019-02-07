@@ -1,5 +1,9 @@
 # posh-dynargs Release History
 
+## 0.1.0.5 - PENDING
+
+* Correct USAGE section in README. Chocolatey installer no longer automatically adds posh-dynargs to the user's profile.
+
 ## 0.1.0.4 - January 29, 2019
 
 * Fix broken Add-PoshDynargsToProfile
