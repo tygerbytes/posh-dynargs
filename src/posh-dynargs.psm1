@@ -33,6 +33,10 @@ $PoshDynargsSettings = @{
 if ($GitPromptSettings) {
     # Piggyback on the posh-git prompt
     # TODO: Better way to do this?
+    if ($GitPromptSettings.DefaultPromptPrefix -and $GitPromptSettings.DefaultPromptPrefix.GetType().Name -ne 'String' ) {
+        Write-Host 'posh-dynargs warning: $GitPromptSettings.DefaultPromptPrefix overwritten' -ForegroundColor Yellow
+        $GitPromptSettings.DefaultPromptPrefix = $null
+    }
     $GitPromptSettings.DefaultPromptPrefix += '$(Register-LocalArgumentCompleters)'
 }
 else {

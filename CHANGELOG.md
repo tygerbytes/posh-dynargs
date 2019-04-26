@@ -1,7 +1,8 @@
 # posh-dynargs Release History
 
-## 0.1.0.5 - PENDING
+## 0.1.0.5 - April 26, 2019
 
+* Warn if $GitPromptSettings.DefaultPromptPrefix is set a type other than string, then set to $null
 * Correct USAGE section in README. Chocolatey installer no longer automatically adds posh-dynargs to the user's profile.
 
 ## 0.1.0.4 - January 29, 2019
